@@ -4,13 +4,13 @@ import HomePage from "../src/Pages/HomePage/HomePage";
 import AllToys from "../src/Pages/AllToys/AllToys";
 import MyToys from "../src/Pages/MyToys/MyToys";
 import AddAToy from "../src/Pages/AddAToy";
-import Blogs from "../src/Pages/Blogs";
 import LoginPage from "../src/Pages/LoginPage";
 import RegisterPage from "../src/Pages/RegisterPage";
 import EditToys from "../src/Pages/MyToys/EditToys";
 import PrivetRoutes from "./PrivetRoutes";
 import Error404Page from "../src/Pages/Error404Page";
 import ViewDetails from "../src/SharedComponent/ViewDetails";
+import ContactUs from "../src/Pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "blogs",
-        element: <Blogs />,
+        path: "contactus",
+        element: <ContactUs />,
       },
       {
         path: "login",

@@ -27,7 +27,6 @@ const LoginPage = () => {
         form.reset();
       })
       .catch((error) => {
-        console.log(error.message);
         setError("Email/Password dosn't match!");
       });
   };

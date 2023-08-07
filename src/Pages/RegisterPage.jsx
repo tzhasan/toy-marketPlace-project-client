@@ -37,8 +37,7 @@ const RegisterPage = () => {
 
         form.reset();
       })
-      // navigate(from, { replace: true })
-      //   navigate('/')
+     
       .catch((error) => {
         setError(error.message);
       });

@@ -143,52 +143,56 @@ const AllToys = () => {
             </tr>
           </thead>
           <tbody>
-            {toys.map((toy, i) => (
-              <tr
-                key={toy._id}
-                className="border-b border-gray-200 dark:border-gray-700"
-              >
-                <td
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white dark:bg-gray-800"
+            {toys.map((toy, i) =>
+              loading ? (
+                <progress key={toy._id} className="progress w-40 "></progress>
+              ) : (
+                <tr
+                  key={toy._id}
+                  className="border-b border-gray-200 dark:border-gray-700"
                 >
-                  {i + 1}
-                </td>
-                <td
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white dark:bg-gray-800 avatar"
-                >
-                  <div className="w-16 rounded-full border-2 border-black">
-                    <img src={toy.toyphoto} />
-                  </div>
-                </td>
-                <td
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100 dark:text-white dark:bg-gray-800"
-                >
-                  {toy.toyname}
-                </td>
-                <td className="px-6 py-4">{toy.category}</td>
-                <td className="px-6 py-4 bg-gray-100 dark:bg-gray-800">
-                  {toy.sellername}
-                </td>
-                <td className="px-6 py-4">{toy.toyprice}</td>
-                <td className="px-6 py-4 bg-gray-100 dark:bg-gray-800">
-                  {toy.quantity}
-                </td>
-                <td className="px-6 py-4">
-                  <label
-                    onClick={() => {
-                      handleModal(toy._id);
-                    }}
-                    htmlFor="my-modal-5"
-                    className="btn btn-sm bg-yellow-300 hover:bg-yellow-500 border-0 text-gray-600"
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white dark:bg-gray-800"
                   >
-                    View Details
-                  </label>
-                </td>
-              </tr>
-            ))}
+                    {i + 1}
+                  </td>
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white dark:bg-gray-800 avatar"
+                  >
+                    <div className="w-16 rounded-full border-2 border-black">
+                      <img src={toy.toyphoto} />
+                    </div>
+                  </td>
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100 dark:text-white dark:bg-gray-800"
+                  >
+                    {toy.toyname}
+                  </td>
+                  <td className="px-6 py-4">{toy.category}</td>
+                  <td className="px-6 py-4 bg-gray-100 dark:bg-gray-800">
+                    {toy.sellername}
+                  </td>
+                  <td className="px-6 py-4">{toy.toyprice}</td>
+                  <td className="px-6 py-4 bg-gray-100 dark:bg-gray-800">
+                    {toy.quantity}
+                  </td>
+                  <td className="px-6 py-4">
+                    <label
+                      onClick={() => {
+                        handleModal(toy._id);
+                      }}
+                      htmlFor="my-modal-5"
+                      className="btn btn-sm bg-yellow-300 hover:bg-yellow-500 border-0 text-gray-600"
+                    >
+                      View Details
+                    </label>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>

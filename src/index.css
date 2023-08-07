@@ -5,3 +5,8 @@
 body{
   font-family: 'Poppins', sans-serif;
 }
+.backgroundImage{
+  background-image: url('../src/assets/wave-haikei.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

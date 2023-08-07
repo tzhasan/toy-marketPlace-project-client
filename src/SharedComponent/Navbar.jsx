@@ -15,6 +15,7 @@ const Navbar = () => {
   const signingOut = () => {
     logOut();
   };
+  console.log(user);
   return (
     <div className="navbar bg-gray-800 bg-opacity-80 md:sticky md:top-0 md:z-50">
       <div className="navbar-start md:mx-10 mx-2">
@@ -26,10 +27,10 @@ const Navbar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-8 w-8"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke='white'
             >
               <path
                 strokeLinecap="round"
@@ -110,14 +111,14 @@ const Navbar = () => {
                     ? "text-yellow-300 hover:bg-transparent"
                     : "active:bg-transparent hover:bg-transparent"
                 }
-                to={"/blogs"}
+                to={"/contactus"}
               >
-                Blogs
+                Contact Us
               </NavLink>
             </li>
           </ul>
         </div>
-        <img className="w-[8%] ml-2" src={logo} alt="" />
+        {/* <img className="w-[8%] ml-2" src={logo} alt="" /> */}
         <a className="btn btn-ghost normal-case text-md md:text-2xl  text-yellow-300">
           Legends
         </a>
@@ -190,9 +191,9 @@ const Navbar = () => {
                   ? "text-yellow-300 hover:bg-transparent"
                   : "active:bg-transparent hover:bg-transparent"
               }
-              to={"/blogs"}
+              to={"/contactus"}
             >
-              Blogs
+              Contact Us
             </NavLink>
           </li>
         </ul>
@@ -203,41 +204,75 @@ const Navbar = () => {
       <div className="navbar-end ">
         {user && (
           <div
-            data-tip={user.displayName}
+            data-tip={user?.displayName}
             className="avatar tooltip tooltip-bottom tooltip-accent"
           >
-            <div className="w-8 rounded  mr-2 ">
-              {user.photoURL ? (
+            <div className="md:w-12 w-8 rounded-full  mr-2 ">
+              {user?.photoURL ? (
                 <img
                   className="w-[50%] "
-                  // title={user.displayName}
+                  title={user.displayName}
                   src={user.photoURL}
                   alt={user.email}
                 />
               ) : (
                 <div
-                  title={user.displayName}
+                  // title={user.displayName}
                   className="md:text-6xl text-3xl text-gray-300 "
                 >
-                  <CgProfile title={user.displayName}></CgProfile>
+                  <CgProfile></CgProfile>
                 </div>
               )}
             </div>
           </div>
         )}
         {user ? (
-          <p
+          <button
             onClick={signingOut}
-            className="btn rounded-lg px-2  md:px-4  bg-yellow-300 hover:bg-yellow-500 border-0 text-gray-600 text-xs md:text-lg"
+            className="relative inline-flex items-center md:px-8 px-6 py-3 overflow-hidden md:text-md text-sm font-medium text-black border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50 bg-white"
           >
-            Log out
-          </p>
+            <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+            <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </span>
+            <span className="relative">Log Out</span>
+          </button>
         ) : (
           <Link
             to="/login"
-            className="btn rounded-lg text-xs md:text-lg px-2 bg-yellow-300 hover:bg-yellow-500 border-0 text-gray-600 "
+            className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-black border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50 bg-white"
           >
-            Log in
+            <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+            <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </span>
+            <span className="relative">Log in</span>
           </Link>
         )}
       </div>
@@ -247,3 +282,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

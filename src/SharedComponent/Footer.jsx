@@ -1,42 +1,88 @@
-import React from "react";
-import logo from "../assets/icons/superhero.png";
-import logo1 from "../assets/icons/google.png";
-import logo2 from "../assets/icons/facebook.png";
-import logo3 from "../assets/icons/linkedin.png";
-
 const Footer = () => {
   return (
-    <div className="flex justify-between gap-4 md:gap-0 p-5 bg-gray-800 opacity-80 text-white">
-      <div className="flex flex-col items-center md:w-1/3">
-        <img className="w-[15%]" src={logo} alt="" />
-
-        <p className="text-yellow-300 font-bold text-xl">LEGENDS</p>
-        <p>since 2015</p>
+    <footer className="text-gray-600 body-font border-t-2">
+      <div
+        className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+        bis_skin_checked={1}
+      >
+        <a
+          href="/"
+          className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <span className="ml-3 text-xl normal-case text-md md:text-2xl  text-yellow-300 font-bold">
+            Legends
+          </span>
+        </a>
+        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+          © 2023 Legends —
+          <a
+            href="https://tajbeul-islam.netlify.app/"
+            className="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            @TAJBEUL_ISLAM
+          </a>
+        </p>
+        <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <a className="cursor-pointer text-gray-500">
+            <svg
+              fill="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+          </a>
+          <a className="cursor-pointer ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+            </svg>
+          </a>
+          <a className="cursor-pointer ml-3 text-gray-500">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width={20} height={20} x={2} y={2} rx={5} ry={5} />
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
+            </svg>
+          </a>
+          <a className="cursor-pointer ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={0}
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+              />
+              <circle cx={4} cy={4} r={2} stroke="none" />
+            </svg>
+          </a>
+        </span>
       </div>
-      <div className="flex flex-col md:w-1/3 text-start">
-        <span className="font-bold text-sm md:text-lg">Services</span>
-        <div className="flex flex-col text-[10px] md:text-sm">
-          <div className="">
-            <p>Frequently Asked Questions (FAQs)</p>
-            <p>Contact form or customer support email</p>
-            <p>Accepted payment methods (e.g., credit cards, PayPal)</p>
-            <p>
-              Statement indicating the ownership of content and intellectual
-              property rights
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="md:w-1/5 space-y-2 md:ml-36 p-4">
-        <p>Connect us with :</p>
-        <div className="flex gap-2">
-          <img className="md:w-[10%] w-6" src={logo2} alt="" />
-          <img className="md:w-[10%] w-6" src={logo3} alt="" />
-          <img className="md:w-[10%] w-6" src={logo1} alt="" />
-        </div>
-      </div>
-    </div>
+    </footer>
   );
 };
 

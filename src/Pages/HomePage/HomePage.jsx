@@ -12,6 +12,7 @@ import ExtraSection2 from "./ExtraSection2";
 
 // marquee
 import Marquee from "react-fast-marquee";
+import Feature from "./Feature";
 // marquee
 
 const HomePage = () => {
@@ -33,16 +34,19 @@ const HomePage = () => {
         Welcome to our Action Figure Legends! Explore a World of Adventure
         and Collectible Figures!
       </Marquee>
-      <div data-aos="zoom-in">
+      <div>
+        <Feature/>
+      </div>
+      <div >
         <GallerySection></GallerySection>
       </div>
-      <div data-aos="zoom-in" className="my-10">
+      <div  className="my-10">
         <ShopByCategory></ShopByCategory>
       </div>
-      <div data-aos="fade-left">
+      <div >
         <ExtraSection1></ExtraSection1>
       </div>
-      <div data-aos="fade-right">
+      <div>
         <ExtraSection2></ExtraSection2>
       </div>
     </div>

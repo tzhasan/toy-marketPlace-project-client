@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Rating from "react-rating";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import "react-tabs/style/react-tabs.css";
 import Loading from "../../SharedComponent/Loading";
@@ -42,13 +44,30 @@ const ShopByCategory = () => {
     setCategory(catagory);
     setToys(toys);
   };
+  const handleNoUserAlert = () => {
+    if (!user) {
+      Swal.fire(
+        "No Access!",
+        "You need to login first to view details",
+        "error"
+      );
+      navigate("/login", {
+        state: { from: location },
+        replace: true,
+      });
+    }
+  }
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   if (loading) {
     return <Loading></Loading>;
   }
+  console.log(allToys);
   return (
     <div>
       <h2 className="text:md md:text-3xl text-yellow-300 font-bold md:my-6 my-4 text-center">
-        Shop by Category
+        SHOP BY CATEGORY
       </h2>
       <Tabs className="w-[90%] mx-auto ">
         <TabList>
@@ -59,62 +78,68 @@ const ShopByCategory = () => {
           <Tab onClick={() => tab("avengers")}>Avengers</Tab>
         </TabList>
         <TabPanel>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 my-4">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {allToys &&
               allToys?.slice(0, 6).map((toy) => {
                 return (
                   <div
-                    className="card glass w-full bg-base-100 rounded-md shadow-md"
+                    data-aos="zoom-in"
                     key={toy._id}
+                    className=" p-4"
+                    bis_skin_checked={1}
                   >
-                    <figure>
+                    <div
+                      className="bg-gray-100 p-6 rounded-lg"
+                      bis_skin_checked={1}
+                    >
                       <img
-                        className="w-full h-52 "
+                        className="h-40 rounded w-full object-cover object-center mb-6"
                         src={toy.toyphoto}
-                        alt="Shoes"
+                        alt="content"
                       />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">
+                      <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
+                        NEW
+                      </h3>
+                      <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
                         {toy.toyname}
-                        <div className="badge badge-secondary text-[8px] bg-white border-1 text-gray-800 ">
-                          NEW
-                        </div>
                       </h2>
-                      <p className="text-green-600 font-bold">
-                        {" "}
-                        Price: {toy.toyprice}$
-                      </p>
-                      <div className="card-actions flex justify-between items-center">
-                        <div className=" py-3">
-                          {"  "}
+                      <div className="leading-relaxed text-base flex justify-between">
+                        <div className="">
+                          <h5>Price: {toy.toyprice} $</h5>
                           <Rating
-                            className="ml-1 text-green-500 "
+                            className=" text-yellow-300 "
                             initialRating={toy.ratings}
                             readonly
                             emptySymbol={<i className="far fa-star"></i>}
                             fullSymbol={<i className="fas fa-star"></i>}
-                          />{" "}
+                          />
                         </div>
-                        <Link
-                          to={user ? `/viewdetails/${toy._id}` : "#"}
-                          className={`btn btn-sm bg-yellow-300 text-gray-700 border-0 hover:bg-yellow-400`}
-                          onClick={() => {
-                            if (!user) {
-                              Swal.fire(
-                                "No Access!",
-                                "You need to login first to view details",
-                                "error"
-                              );
-                              navigate("/login", {
-                                state: { from: location },
-                                replace: true,
-                              });
-                            }
-                          }}
-                        >
-                          View details
-                        </Link>
+                        <div>
+                          <Link
+                            onClick={() => handleNoUserAlert()}
+                            to={user ? `/viewdetails/${toy._id}` : "#"}
+                            className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-gray-500 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
+                          >
+                            <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+                            <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+                              <svg
+                                className="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                />
+                              </svg>
+                            </span>
+                            <span className="relative">View</span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -157,19 +182,28 @@ const ShopByCategory = () => {
                           />{" "}
                         </div>
                         <Link
+                          onClick={() => handleNoUserAlert()}
                           to={user ? `/viewdetails/${toy._id}` : "#"}
-                          className={`btn btn-sm bg-yellow-300 text-gray-700 border-0 hover:bg-yellow-400`}
-                          onClick={() => {
-                            if (!user) {
-                              Swal.fire(
-                                "No Access!",
-                                "You need to login first to view details",
-                                "error"
-                              );
-                            }
-                          }}
+                          className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-gray-500 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
                         >
-                          View details
+                          <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+                          <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                          </span>
+                          <span className="relative">View</span>
                         </Link>
                       </div>
                     </div>
@@ -212,19 +246,28 @@ const ShopByCategory = () => {
                           />{" "}
                         </div>
                         <Link
+                          onClick={() => handleNoUserAlert()}
                           to={user ? `/viewdetails/${toy._id}` : "#"}
-                          className={`btn btn-sm bg-yellow-300 text-gray-700 border-0 hover:bg-yellow-400`}
-                          onClick={() => {
-                            if (!user) {
-                              Swal.fire(
-                                "No Access!",
-                                "You need to login first to view details",
-                                "error"
-                              );
-                            }
-                          }}
+                          className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-gray-500 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
                         >
-                          View details
+                          <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+                          <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                          </span>
+                          <span className="relative">View</span>
                         </Link>
                       </div>
                     </div>
@@ -267,19 +310,28 @@ const ShopByCategory = () => {
                           />{" "}
                         </div>
                         <Link
+                          onClick={() => handleNoUserAlert()}
                           to={user ? `/viewdetails/${toy._id}` : "#"}
-                          className={`btn btn-sm bg-yellow-300 text-gray-700 border-0 hover:bg-yellow-400`}
-                          onClick={() => {
-                            if (!user) {
-                              Swal.fire(
-                                "No Access!",
-                                "You need to login first to view details",
-                                "error"
-                              );
-                            }
-                          }}
+                          className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-gray-500 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
                         >
-                          View details
+                          <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+                          <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                          </span>
+                          <span className="relative">View</span>
                         </Link>
                       </div>
                     </div>
@@ -322,19 +374,28 @@ const ShopByCategory = () => {
                           />{" "}
                         </div>
                         <Link
+                          onClick={() => handleNoUserAlert()}
                           to={user ? `/viewdetails/${toy._id}` : "#"}
-                          className={`btn btn-sm bg-yellow-300 text-gray-700 border-0 hover:bg-yellow-400`}
-                          onClick={() => {
-                            if (!user) {
-                              Swal.fire(
-                                "No Access!",
-                                "You need to login first to view details",
-                                "error"
-                              );
-                            }
-                          }}
+                          className="relative inline-flex items-center md:px-10 px-8 py-3 overflow-hidden md:text-md text-sm font-medium text-gray-500 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
                         >
-                          View details
+                          <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease" />
+                          <span className="absolute right-0 flex items-center justify-start md:w-10 md:h-10 w-8 h-8 duration-300 transform translate-x-full group-hover:translate-x-2 md:group-hover:translate-x-2 ease">
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                          </span>
+                          <span className="relative">View</span>
                         </Link>
                       </div>
                     </div>
